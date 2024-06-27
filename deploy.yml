@@ -1,0 +1,36 @@
+- name: Deploy applications
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+    
+    - name: Pull Backend Docker image
+      docker_image:
+        name: tnehara831/airline-ticket-booking-backend
+        tag: latest
+        source: pull
+    
+    - name: Run Backend Container
+      docker_container:
+        name: backend
+        image: tnehara831/airline-ticket-booking-backend:latest
+        state: started
+        ports:
+          - "8080:8080"
+    
+    - name: Pull Frontend Docker image
+      docker_image:
+        name: tnehara831/airline-ticket-booking-frontend
+        tag: latest
+        source: pull
+    
+    - name: Run Frontend Container
+      docker_container:
+        name: frontend
+        image: tnehara831/airline-ticket-booking-frontend:latest
+        state: started
+        ports:
+          - "80:80"

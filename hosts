@@ -1,0 +1,5 @@
+[backend]
+18.234.88.116 ansible_user=ec2-user ansible_private_key_file=airline-ticket-booking.pem
+
+[frontend]
+18.234.88.116 ansible_user=ec2-user ansible_private_key_file=airline-ticket-booking.pem
